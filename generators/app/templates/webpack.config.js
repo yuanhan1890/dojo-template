@@ -31,7 +31,7 @@ module.exports = {
   resolve: {
     plugins: [
       new TSConfigPathsPlugin()
-    ]
+    ],
     alias: {
       // input alias
     }
