@@ -1,9 +1,10 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 const ROOT_PATH = __dirname
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.ts',
   output: {
     filename: 'bundle.js',
     path: path.resolve(ROOT_PATH, './dist'),
@@ -12,23 +13,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: require.resolve('babel-loader'),
-        options: {
-          presets: [
-            [
-              require.resolve('@babel/preset-env'),
-              {
-                "loose": true,
-                "modules": "cjs"
-              }
-            ]
-          ],
-          plugins: [
-            require.resolve('@babel/plugin-proposal-class-properties'),
-            require.resolve('@babel/plugin-transform-runtime')
-          ]
-        }
+        test: /\.ts$/,
+        loader: require.resolve('ts-loader')
       }
     ]
   },
@@ -43,6 +29,9 @@ module.exports = {
     })
   ],
   resolve: {
+    plugins: [
+      new TSConfigPathsPlugin()
+    ]
     alias: {
       // input alias
     }
